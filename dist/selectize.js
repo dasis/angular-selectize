@@ -7,7 +7,7 @@ angular.module('selectize', []).value('selectizeConfig', {}).directive("selectiz
   return {
     restrict: 'EA',
     require: '^ngModel',
-    scope: {ngModel: '=', config: '=selectize', options: '=', ngDisabled: '='},
+    scope: { ngModel: '=', config: '=selectize', options: '=', ngDisabled: '=', ngChange: '&' },
     link: function(scope, element, attrs, modelCtrl) {
       var config = angular.copy(selectizeConfig);
       var selectize;
@@ -83,6 +83,7 @@ angular.module('selectize', []).value('selectizeConfig', {}).directive("selectiz
         scope.$evalAsync(function(){
           scope.ngModel = getValue();
           updateValidity();
+          scope.ngChange();
         });
       }
 
